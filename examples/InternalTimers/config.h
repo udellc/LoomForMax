@@ -1,0 +1,13 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1\
+	},\
+	'components':[\
+		{\
+			'name':'Interrupt_Manager',\
+			'params':'default'\
+		}\
+	]\
+}"

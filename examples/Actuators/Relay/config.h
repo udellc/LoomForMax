@@ -1,0 +1,15 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1\
+	},\
+	'components':[\
+		{\
+			'name':'Relay',\
+			'params':[\
+				10\
+			]\
+		}\
+	]\
+}"

@@ -1,0 +1,21 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1\
+	},\
+	'components':[\
+		{\
+			'name':'DS3231',\
+			'params':[11,true]\
+		},\
+		{\
+			'name':'Interrupt_Manager',\
+			'params':'default'\
+		},\
+		{\
+			'name':'Analog',\
+			'params':'default'\
+		}\
+	]\
+}"

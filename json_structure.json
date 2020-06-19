@@ -1,0 +1,95 @@
+// This file provides examples of the formats of Loom json
+// objects. For configuration, data, and commands
+
+
+// = = = Configuration Object = = =
+
+{
+	"general": {
+		"name": "Device",
+		"instance": 1,
+	},
+	"components": [
+		{
+			"name": "moduleA",
+			"params": "default"
+		},
+		{
+			"name": "moduleB",
+			"params": [
+				"moduleB",
+				10,
+				true
+			]
+		}
+	]
+}
+
+
+// = = = Data Object = = =
+// Eventually will support individually timestamped blocks of data
+
+{
+	"type" : "data",
+	"id" : {
+		"name" : "Device",
+		"instance" : 1,
+	},
+	"timestamp" : {
+		"date" : "some_date",
+		"time" : "some_time"
+	},
+	"contents" :
+	[
+		{ 
+			"module" : "moduleA",
+			"data" : [ 
+				{"key1" : "val1"}, 
+				{"key2" : "val2"}, 
+				{"key3" : "val3"}
+			]
+		},
+		{ 
+			"module" : "moduleB",
+			"data" : [ 
+				{"key1" : "val1"}, 
+				{"key2" : "val2"}
+			]
+		}
+	]
+}
+
+
+// = = = Command Object = = =
+
+{
+	"src" : { ... },
+	"dst" : {
+		"name" : "Device",
+		"instance" : 1,
+	},
+	"type" : "command",
+	"commands" :
+	[
+		{ 
+			"module" : "moduleA",
+			"func" : "s",
+			"params" : 
+			[
+				"param1",
+				"param2",
+				"param3"
+			]
+		},
+		{ 
+			"module" : "moduleB",
+			"func" : "s",
+			"params" : 
+			[
+				"param1",
+				"param2"
+			]
+		}
+	]
+}
+
