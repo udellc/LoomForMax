@@ -1692,7 +1692,7 @@
 					"fontsize" : 12.0,
 					"id" : "obj-111",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 610.0, 538.0, 101.0, 22.0 ],
@@ -4248,7 +4248,7 @@
 					}
 ,
 					"text" : "pattrstorage @savemode 0",
-					"varname" : "u633001551"
+					"varname" : "u527006037"
 				}
 
 			}
@@ -6098,7 +6098,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 146.0, 340.0, 50.0, 22.0 ],
-									"text" : "7452"
+									"text" : "7459"
 								}
 
 							}
@@ -6126,8 +6126,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 235.0, 223.0, 39.0, 89.0 ],
-									"text" : "store 192.168.1.30 Chet 7452"
+									"patching_rect" : [ 235.0, 223.0, 41.0, 89.0 ],
+									"text" : "store 192.168.1.8 Chet2 7458"
 								}
 
 							}
@@ -6937,7 +6937,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 5.535675, 124.795197000000002, 154.0, 94.0 ],
 					"rowheight" : 12,
-					"rows" : 1
+					"rows" : 2
 				}
 
 			}
@@ -8117,14 +8117,14 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "genNetsend.js",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "listToFunbuff.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
