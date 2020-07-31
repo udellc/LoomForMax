@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 385.0, 79.0, 1303.0, 967.0 ],
+		"rect" : [ 34.0, 79.0, 789.0, 540.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,22 +39,62 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"description" : "",
-					"editor_interface" : "",
-					"fontface" : 0,
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"ftm_objref_conv" : 0,
-					"ftm_scope" : 3,
-					"id" : "obj-14",
-					"maxclass" : "ftm.object",
-					"name" : "",
+					"id" : "obj-22",
+					"linecount" : 5,
+					"maxclass" : "comment",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 612.000009119510651, 655.200009763240814, 64.0, 18.0 ],
-					"persistence" : 0,
-					"scope" : 0
+					"numoutlets" : 0,
+					"patching_rect" : [ 117.0, 321.0, 363.0, 74.0 ],
+					"presentation_linecount" : 8,
+					"text" : "<< extract beats from link.clock, make as many of these as you wish. Parameters are \nquantum: (usually 1) ratio of talas to play subdivisions over\nsubdivisions: how many beats to divide the tala equally by[link.beats 1 32] gives you 32 subdivisions over the tala"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 80.0, 261.0, 220.0, 33.0 ],
+					"text" : "<< Master Clock, sync can  be sourced from musiclinks if Net is enabled"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-7",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 19.0, 186.0, 35.0, 22.0 ],
+					"text" : "open"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 19.0, 213.0, 51.0, 22.0 ],
+					"text" : "pcontrol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 19.0, 156.0, 58.0, 22.0 ],
+					"text" : "loadbang"
 				}
 
 			}
@@ -65,7 +105,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "bang", "bang" ],
-					"patching_rect" : [ 859.0, 185.0, 86.0, 22.0 ],
+					"patching_rect" : [ 19.0, 321.0, 86.0, 22.0 ],
 					"text" : "link.beats 1 32"
 				}
 
@@ -77,7 +117,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "signal" ],
-					"patching_rect" : [ 877.0, 105.0, 64.0, 22.0 ],
+					"patching_rect" : [ 117.0, 156.0, 64.0, 22.0 ],
 					"text" : "musiclinks",
 					"varname" : "musiclinks"
 				}
@@ -89,7 +129,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 800.0, 40.0, 57.0, 22.0 ],
+					"patching_rect" : [ 19.0, 261.0, 57.0, 22.0 ],
 					"text" : "link.clock"
 				}
 
@@ -942,7 +982,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 324.0, 210.0, 150.0, 126.0 ],
+					"patching_rect" : [ 15.0, 490.0, 150.0, 126.0 ],
 					"varname" : "patch_1",
 					"viewvisibility" : 1
 				}
@@ -2383,7 +2423,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 324.0, 155.0, 220.0, 36.0 ],
+					"patching_rect" : [ 15.0, 435.0, 220.0, 36.0 ],
 					"varname" : "patch_0",
 					"viewvisibility" : 1
 				}
@@ -2411,8 +2451,29 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"source" : [ "obj-7", 0 ]
 				}
 
 			}
@@ -2461,52 +2522,48 @@
 			}
 , 			{
 				"name" : "link.clock.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "musiclinks.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "genNetsend.js",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "listToFunbuff.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "link.beats.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "seq_builder.maxpat",
-				"bootpath" : "~/Documents/Max 8/Library/Loom2/MPG",
-				"patcherrelativepath" : "./MPG",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "link.phasor~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "ftm.object.mxo",
 				"type" : "iLaX"
 			}
  ],
