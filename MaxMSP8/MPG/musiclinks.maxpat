@@ -4334,7 +4334,7 @@
 					}
 ,
 					"text" : "pattrstorage @savemode 0",
-					"varname" : "u062003692"
+					"varname" : "u484002086"
 				}
 
 			}
@@ -6212,8 +6212,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 235.0, 223.0, 45.0, 76.0 ],
-									"text" : "store 192.168.1.8 Chet 7450"
+									"patching_rect" : [ 235.0, 223.0, 55.0, 76.0 ],
+									"text" : "store 192.168.1.8 Yourname 7450"
 								}
 
 							}
