@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 38.0, 79.0, 942.0, 758.0 ],
+		"rect" : [ 38.0, 79.0, 269.0, 557.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -4401,7 +4401,7 @@
 					}
 ,
 					"text" : "pattrstorage @savemode 0",
-					"varname" : "u208000980"
+					"varname" : "u791000503"
 				}
 
 			}
@@ -6276,7 +6276,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 235.0, 223.0, 55.0, 76.0 ],
-									"text" : "store 192.168.1.25 YourName 7450"
+									"text" : "store 192.168.1.25 Chaz 7450"
 								}
 
 							}
@@ -6752,20 +6752,20 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 189.0, 420.0, 100.0, 0.0 ],
+									"patching_rect" : [ 189.0, 420.0, 100.0, 22.0 ],
 									"text" : "route 0"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-9",
-									"linecount" : 2,
+									"id" : "obj-16",
 									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 189.0, 450.0, 100.0, 0.0 ],
-									"text" : "udpsend localhost 7450"
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 189.0, 420.0, 100.0, 22.0 ],
+									"text" : "route 0"
 								}
 
 							}
@@ -6916,7 +6916,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-16", 0 ],
+									"order" : 0,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
+									"order" : 1,
 									"source" : [ "obj-30", 0 ]
 								}
 
@@ -7023,7 +7032,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-16", 0 ],
+									"order" : 0,
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
+									"order" : 1,
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -7039,20 +7057,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-2", 0 ],
 									"source" : [ "obj-53", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"source" : [ "obj-54", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-9", 0 ],
-									"source" : [ "obj-6", 0 ]
 								}
 
 							}
@@ -7132,7 +7136,7 @@
 			}
 , 			{
 				"box" : 				{
-					"cols" : 3,
+					"cols" : 1,
 					"fontface" : 0,
 					"fontname" : "Arial",
 					"fontsize" : 8.0,
