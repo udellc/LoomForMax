@@ -2,13 +2,14 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 0,
-			"revision" : 3,
-			"architecture" : "x86",
+			"major" : 8,
+			"minor" : 1,
+			"revision" : 1,
+			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
+		"classnamespace" : "box",
 		"rect" : [ 34.0, 79.0, 325.0, 192.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -40,12 +41,12 @@
 				"box" : 				{
 					"comment" : "Tonic MIDI pitch",
 					"id" : "obj-5",
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 79.0, 13.0, 25.0, 25.0 ],
-					"style" : ""
+					"patching_rect" : [ 79.0, 13.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -58,8 +59,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 92.0, 129.0, 156.0, 47.0 ],
-					"style" : "",
+					"patching_rect" : [ 92.0, 172.0, 156.0, 47.0 ],
 					"text" : "WARNING: assumes original sample pitch is 60, middle-C"
 				}
 
@@ -74,7 +74,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 126.0, 13.0, 154.0, 60.0 ],
-					"style" : "",
 					"text" : "12th root of 2 for translating semitone steps into \"speed\" ratios for SFplay and Groove"
 				}
 
@@ -83,11 +82,11 @@
 				"box" : 				{
 					"comment" : "Output corresponding speed ratio",
 					"id" : "obj-2",
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 42.0, 140.0, 25.0, 25.0 ],
-					"style" : ""
+					"patching_rect" : [ 42.0, 177.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -95,12 +94,12 @@
 				"box" : 				{
 					"comment" : "input target MIDI pitch",
 					"id" : "obj-1",
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
-					"patching_rect" : [ 42.0, 13.0, 25.0, 25.0 ],
-					"style" : ""
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 42.0, 13.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -113,8 +112,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 42.0, 106.0, 122.0, 22.0 ],
-					"style" : "",
+					"patching_rect" : [ 42.0, 143.0, 122.0, 22.0 ],
 					"text" : "expr pow(2.\\,($f1/12))"
 				}
 
@@ -128,9 +126,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
-					"outlettype" : [ "float" ],
-					"patching_rect" : [ 42.0, 45.0, 33.0, 22.0 ],
-					"style" : "",
+					"outlettype" : [ "int" ],
+					"patching_rect" : [ 42.0, 68.0, 33.0, 22.0 ],
 					"text" : "- #1"
 				}
 
@@ -139,8 +136,6 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-20", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -148,8 +143,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-33", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ "obj-20", 0 ]
 				}
 
@@ -157,8 +150,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ "obj-33", 0 ]
 				}
 
@@ -166,13 +157,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-20", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
 					"source" : [ "obj-5", 0 ]
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [  ],
+		"autosave" : 0
 	}
 
 }

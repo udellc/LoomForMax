@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 0,
-			"revision" : 8,
+			"minor" : 1,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 2152.0, 102.0, 822.0, 706.0 ],
+		"rect" : [ 584.0, 102.0, 504.0, 706.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -183,7 +183,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 589.0, 196.0, 50.0, 22.0 ],
-					"text" : "5"
+					"text" : "6"
 				}
 
 			}
@@ -255,7 +255,7 @@
 					"outlettype" : [ "", "int", "", "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 447.0, 153.779540999999995, 51.0, 25.0 ],
-					"text" : "57"
+					"text" : "60"
 				}
 
 			}
@@ -396,7 +396,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-8",
-					"items" : [ "-root-", ",", "I", ",", "II", ",", "III", ",", "IV", ",", "V", ",", "VI", ",", "VII" ],
+					"items" : [ "I", ",", "II", ",", "III", ",", "IV", ",", "V", ",", "VI", ",", "VII" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -441,8 +441,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 8,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1102,8 +1102,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 8,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1400,8 +1400,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 8,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1526,7 +1526,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
-									"outlettype" : [ "" ],
+									"outlettype" : [ "clear" ],
 									"patching_rect" : [ 244.0, 269.0, 69.0, 17.0 ],
 									"text" : "listToFunbuff"
 								}
@@ -2536,7 +2536,7 @@
 					"patching_rect" : [ 401.492553999999984, 209.0, 106.0, 17.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 165.5, 65.0, 52.0, 17.0 ],
-					"text" : "66 69 73"
+					"text" : "71 74 77"
 				}
 
 			}
@@ -2902,8 +2902,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 8,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3260,22 +3260,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-122", 1 ],
-					"order" : 1,
-					"source" : [ "obj-19", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-42", 1 ],
-					"order" : 0,
-					"source" : [ "obj-19", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-34", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
@@ -3549,8 +3533,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-122", 1 ],
+					"order" : 3,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-21", 0 ],
-					"order" : 1,
+					"order" : 2,
 					"source" : [ "obj-8", 0 ]
 				}
 
@@ -3558,6 +3550,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
+					"order" : 1,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-42", 1 ],
 					"order" : 0,
 					"source" : [ "obj-8", 0 ]
 				}
@@ -3573,16 +3573,23 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "input.png",
-				"bootpath" : "~/Downloads/Max Patches to Remake",
+				"bootpath" : "~/Documents/Max 8/Library/Loom2",
 				"patcherrelativepath" : ".",
 				"type" : "PNG",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "output.png",
-				"bootpath" : "~/Downloads/Max Patches to Remake",
+				"bootpath" : "~/Documents/Max 8/Library/Loom2",
 				"patcherrelativepath" : ".",
 				"type" : "PNG",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "listToFunbuff.maxpat",
+				"bootpath" : "~/Documents/Max 8/Library/MPG",
+				"patcherrelativepath" : "../MPG",
+				"type" : "JSON",
 				"implicit" : 1
 			}
  ],
