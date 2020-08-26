@@ -31,6 +31,15 @@ DrumKit
 Lightsaber
 MidiOut
 Musicbox
+OptronBOW
+OptronCnfti
+OptronFire
+OptronGlitter
+OptronHSV
+OptronMouth
+OptronPpit
+OptronRGBSprite
+OptronSpit
 OSC_Out
 SimpleSamp
 Switchblade
