@@ -8,6 +8,7 @@ MidiIn
 OSC_In
 ArduinoIn
 OptronMini
+OptronZX
 --Process--
 ChordDegree
 Concatenate
