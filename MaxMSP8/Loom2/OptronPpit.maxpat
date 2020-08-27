@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ -62.0, 190.399947999999995, 71.0, 22.0 ],
+					"text" : "s LEDquery"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-56",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
@@ -51,7 +62,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Hue (0 - 255)",
+					"comment" : "Enable (0 - 1)",
 					"id" : "obj-69",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -92,7 +103,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 11.0, 162.499869999999987, 63.0, 22.0 ],
+					"patching_rect" : [ -22.5, 160.29989599999999, 63.0, 22.0 ],
 					"text" : "loadbang"
 				}
 
@@ -227,7 +238,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "Brightness (0 - 255)",
+					"comment" : "Fade (0 - 255)",
 					"id" : "obj-60",
 					"index" : 0,
 					"maxclass" : "inlet",
@@ -245,7 +256,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 65.0, 20.5, 216.0, 20.0 ],
-					"text" : "SPT H, S, V, LED_start, len, fadeFast"
+					"text" : "PPT H, S, V, LED_start, len, fadeFast"
 				}
 
 			}
@@ -416,7 +427,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 717.0, 79.0, 615.0, 527.0 ],
+						"rect" : [ 775.0, 285.0, 615.0, 508.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -445,6 +456,54 @@
 						"subpatcher_template" : "",
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-17",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 3.0, 175.0, 594.0, 21.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 3.0, 223.0, 594.0, 21.0 ],
+									"text" : "Fade effect (0 - 255) - time it takes for color to fade out, 0 = fast fade; 255 = slow fade",
+									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-15",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1.0, 78.0, 594.0, 21.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 3.0, 78.0, 594.0, 21.0 ],
+									"text" : "En (0 - 1) - Enable off or on",
+									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-12",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 2.0, 50.0, 594.0, 21.0 ],
+									"presentation" : 1,
+									"presentation_rect" : [ 3.0, 50.0, 594.0, 21.0 ],
+									"text" : "Colored Spit, yuck! PPIT is exactly like SPIT but on a seperate layer for twice the fun!",
+									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-16",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -466,7 +525,7 @@
 									"patching_rect" : [ 272.0, 257.0, 241.0, 141.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 10,
-									"presentation_rect" : [ 3.0, 354.0, 241.0, 141.0 ],
+									"presentation_rect" : [ 3.0, 431.0, 241.0, 141.0 ],
 									"text" : "You can send remote OSC formatted data to a send object with OSCToOptron name\n\n/HSv x x x x x : sets all params\nor set an individual param remotely by:\n/H x\n/S x\n/V x\n/LED_start x\n/len x"
 								}
 
@@ -478,10 +537,10 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 158.0, 262.0, 81.0, 22.0 ],
+									"patching_rect" : [ 158.0, 262.0, 74.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 333.0, 400.0, 81.0, 22.0 ],
-									"text" : "/HSv /len 127"
+									"presentation_rect" : [ 333.0, 477.0, 81.0, 22.0 ],
+									"text" : "/PPT /len 12"
 								}
 
 							}
@@ -492,10 +551,11 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 130.0, 228.0, 91.0, 22.0 ],
+									"patching_rect" : [ 130.0, 228.0, 148.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 281.0, 368.0, 91.0, 22.0 ],
-									"text" : "/HSv 0 0 0 0 30"
+									"presentation_linecount" : 2,
+									"presentation_rect" : [ 281.0, 445.0, 91.0, 35.0 ],
+									"text" : "/PPT 138 254 254 35 2 52"
 								}
 
 							}
@@ -507,7 +567,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 130.0, 345.0, 109.0, 22.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 281.0, 448.0, 93.0, 22.0 ],
+									"presentation_rect" : [ 281.0, 525.0, 93.0, 22.0 ],
 									"text" : "s OSCToOptron"
 								}
 
@@ -523,7 +583,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3.0, 331.0, 63.0, 50.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 331.0, 122.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 408.0, 122.0, 21.0 ],
 									"text" : "OSC Commands:"
 								}
 
@@ -538,7 +598,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3.0, 133.0, 594.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 133.0, 594.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 197.0, 594.0, 21.0 ],
 									"text" : "Length (0 - LED last) - Length of LED pattern",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -554,7 +614,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 110.0, 594.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 110.0, 594.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 174.0, 594.0, 21.0 ],
 									"text" : "Start (0 - LED last) - LED number from begining of strand to begin lighting up LEDs",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -570,7 +630,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3.0, 107.0, 594.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 85.0, 594.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 149.0, 594.0, 21.0 ],
 									"text" : "Volume (0 - 255) - Brightness/Fade, 0 = full dark; 255 = full bright",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -586,7 +646,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 3.0, 84.0, 594.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 62.0, 594.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 126.0, 594.0, 21.0 ],
 									"text" : "Saturation (0 - 255) - 0 = white; 255 = full color saturation",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -603,7 +663,7 @@
 									"patching_rect" : [ 1.0, 40.0, 63.0, 21.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 3.0, 11.0, 63.0, 21.0 ],
-									"text" : "HSV:"
+									"text" : "PPIT:"
 								}
 
 							}
@@ -617,7 +677,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 1.0, 15.0, 594.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 39.0, 594.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 103.0, 594.0, 21.0 ],
 									"text" : "Hue (0 - 255) - Rainbow color index, determines the color",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -635,7 +695,7 @@
 									"patching_rect" : [ 24.0, 16.0, 594.0, 108.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 7,
-									"presentation_rect" : [ 3.0, 216.0, 594.0, 108.0 ],
+									"presentation_rect" : [ 3.0, 293.0, 594.0, 108.0 ],
 									"text" : "Shift-click: extend the range instead of replacing it. \n\nCommand-click (Mac) / Control-double-click (Win) & drag: shift the current range values up or down.\n\nOption-click (Mac) / Alt-click (Win) & vertical drag: expand or shrink the currently selected range.\n\nCommand-double-click (Mac) / Control-double-click (Win): select the entire range.",
 									"textcolor" : [ 0.426667, 0.426525, 0.430668, 1.0 ]
 								}
@@ -651,7 +711,7 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 0.0, 0.0, 63.0, 21.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 3.0, 189.0, 63.0, 21.0 ],
+									"presentation_rect" : [ 3.0, 266.0, 63.0, 21.0 ],
 									"text" : "Mousing:"
 								}
 
@@ -1503,7 +1563,7 @@
 					"patching_rect" : [ 417.0, 311.0, 190.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.0, 134.0, 190.0, 23.0 ],
-					"size" : 46.0
+					"size" : 45.0
 				}
 
 			}
@@ -1521,10 +1581,10 @@
 					"saturation" : 1.0,
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
-							"parameter_longname" : "swatch",
-							"parameter_invisible" : 1,
 							"parameter_shortname" : "swatch",
-							"parameter_type" : 3
+							"parameter_type" : 3,
+							"parameter_longname" : "swatch",
+							"parameter_invisible" : 1
 						}
 
 					}
@@ -1978,7 +2038,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"order" : 1,
+					"source" : [ "obj-62", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-71", 0 ],
+					"order" : 0,
 					"source" : [ "obj-62", 0 ]
 				}
 
@@ -2129,8 +2198,8 @@
 , 			{
 				"name" : "Default M4L",
 				"default" : 				{
-					"fontname" : [ "Arial Bold" ],
 					"fontsize" : [ 11.0 ],
+					"fontname" : [ "Arial Bold" ],
 					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ]
 				}
 ,
@@ -2140,8 +2209,8 @@
 , 			{
 				"name" : "Default M4L Poletti",
 				"default" : 				{
-					"fontname" : [ "Arial Bold" ],
 					"fontsize" : [ 10.0 ],
+					"fontname" : [ "Arial Bold" ],
 					"patchlinecolor" : [ 0.290196, 0.309804, 0.301961, 0.85 ]
 				}
 ,
@@ -2151,9 +2220,9 @@
 , 			{
 				"name" : "Default M4L-1",
 				"default" : 				{
+					"fontsize" : [ 11.0 ],
 					"fontname" : [ "Arial" ],
 					"fontface" : [ 1 ],
-					"fontsize" : [ 11.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color1" : [ 0.376471, 0.384314, 0.4, 1.0 ],
@@ -2188,12 +2257,12 @@
 , 			{
 				"name" : "Luca",
 				"default" : 				{
-					"fontname" : [ "Open Sans Semibold" ],
 					"accentcolor" : [ 0.32549, 0.345098, 0.372549, 1.0 ],
+					"color" : [ 0.475135, 0.293895, 0.251069, 1.0 ],
 					"elementcolor" : [ 0.786675, 0.801885, 0.845022, 1.0 ],
 					"bgcolor" : [ 0.904179, 0.895477, 0.842975, 0.56 ],
+					"fontname" : [ "Open Sans Semibold" ],
 					"selectioncolor" : [ 0.720698, 0.16723, 0.080014, 1.0 ],
-					"color" : [ 0.475135, 0.293895, 0.251069, 1.0 ],
 					"textcolor_inverse" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -2213,9 +2282,9 @@
 , 			{
 				"name" : "M4L 10 Bold",
 				"default" : 				{
-					"fontface" : [ 1 ],
 					"fontsize" : [ 10.0 ],
-					"patchlinecolor" : [ 0.0, 0.0, 0.0, 0.25 ]
+					"patchlinecolor" : [ 0.0, 0.0, 0.0, 0.25 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2234,8 +2303,8 @@
 , 			{
 				"name" : "Matt",
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2519,12 +2588,12 @@
 , 			{
 				"name" : "WTF",
 				"default" : 				{
-					"fontname" : [ "HydrogenType" ],
 					"accentcolor" : [ 0.50764, 0.065317, 0.112129, 1.0 ],
-					"elementcolor" : [ 0.461105, 0.492646, 0.591878, 1.0 ],
-					"bgcolor" : [ 0.163647, 0.174699, 0.17409, 1.0 ],
 					"fontsize" : [ 18.0 ],
 					"color" : [ 0.113725, 0.580392, 0.737255, 1.0 ],
+					"elementcolor" : [ 0.461105, 0.492646, 0.591878, 1.0 ],
+					"bgcolor" : [ 0.163647, 0.174699, 0.17409, 1.0 ],
+					"fontname" : [ "HydrogenType" ],
 					"patchlinecolor" : [ 0.231373, 0.121569, 0.305882, 0.9 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -2544,11 +2613,11 @@
 , 			{
 				"name" : "classic",
 				"default" : 				{
-					"fontname" : [ "Geneva" ],
 					"accentcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
 					"fontsize" : [ 9.0 ],
 					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
+					"bgcolor" : [ 0.83978, 0.839941, 0.839753, 1.0 ],
+					"fontname" : [ "Geneva" ],
 					"textcolor_inverse" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"patchlinecolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor" : 					{
@@ -2613,10 +2682,10 @@
 , 			{
 				"name" : "classicKslider",
 				"default" : 				{
+					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ]
+					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2625,8 +2694,8 @@
 , 			{
 				"name" : "classicLed",
 				"default" : 				{
-					"elementcolor" : [ 0.6, 0.0, 0.0, 1.0 ],
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ]
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"elementcolor" : [ 0.6, 0.0, 0.0, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2654,9 +2723,9 @@
 , 			{
 				"name" : "classicNodes",
 				"default" : 				{
-					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
 					"fontsize" : [ 9.0 ],
-					"color" : [ 0.839216, 0.839216, 0.839216, 1.0 ]
+					"color" : [ 0.839216, 0.839216, 0.839216, 1.0 ],
+					"elementcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2701,8 +2770,8 @@
 , 			{
 				"name" : "classicScope~",
 				"default" : 				{
-					"bgcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
-					"color" : [ 0.462745, 0.933333, 0.0, 1.0 ]
+					"color" : [ 0.462745, 0.933333, 0.0, 1.0 ],
+					"bgcolor" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2711,8 +2780,8 @@
 , 			{
 				"name" : "classicTab",
 				"default" : 				{
-					"elementcolor" : [ 0.839216, 0.839216, 0.839216, 1.0 ],
-					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ]
+					"color" : [ 0.498039, 0.498039, 0.498039, 1.0 ],
+					"elementcolor" : [ 0.839216, 0.839216, 0.839216, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2731,8 +2800,8 @@
 , 			{
 				"name" : "classicToggle",
 				"default" : 				{
-					"elementcolor" : [ 0.376471, 0.384314, 0.4, 0.0 ],
-					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
+					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
+					"elementcolor" : [ 0.376471, 0.384314, 0.4, 0.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2750,8 +2819,8 @@
 , 			{
 				"name" : "classicWaveform~",
 				"default" : 				{
-					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 0.5 ],
-					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ]
+					"color" : [ 0.380392, 0.380392, 0.380392, 1.0 ],
+					"selectioncolor" : [ 0.498039, 0.498039, 0.498039, 0.5 ]
 				}
 ,
 				"parentstyle" : "",
@@ -2760,8 +2829,8 @@
 , 			{
 				"name" : "dark-night-patch",
 				"default" : 				{
-					"textcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 					"accentcolor" : [ 0.952941, 0.564706, 0.098039, 1.0 ],
+					"textcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 					"patchlinecolor" : [ 0.439216, 0.74902, 0.254902, 0.898039 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
@@ -2785,8 +2854,8 @@
 , 			{
 				"name" : "jpatcher002",
 				"default" : 				{
-					"fontname" : [ "Ableton Sans Book" ],
 					"fontsize" : [ 9.5 ],
+					"fontname" : [ "Ableton Sans Book" ],
 					"clearcolor" : [ 0.32549, 0.345098, 0.372549, 0.0 ],
 					"patchlinecolor" : [ 0.65098, 0.65098, 0.65098, 0.0 ],
 					"bgfillcolor" : 					{
@@ -2806,13 +2875,13 @@
 , 			{
 				"name" : "jpink",
 				"default" : 				{
-					"textcolor" : [ 0.619608, 0.0, 0.360784, 1.0 ],
 					"accentcolor" : [ 0.619608, 0.0, 0.360784, 1.0 ],
+					"color" : [ 0.619608, 0.0, 0.360784, 1.0 ],
+					"textcolor" : [ 0.619608, 0.0, 0.360784, 1.0 ],
 					"elementcolor" : [ 0.619608, 0.0, 0.360784, 1.0 ],
 					"bgcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
 					"clearcolor" : [ 0.113725, 0.607843, 0.607843, 1.0 ],
 					"selectioncolor" : [ 0.619608, 0.0, 0.360784, 1.0 ],
-					"color" : [ 0.619608, 0.0, 0.360784, 1.0 ],
 					"patchlinecolor" : [ 0.65, 0.65, 0.65, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "color",
@@ -3007,8 +3076,8 @@
 , 			{
 				"name" : "rsliderGold",
 				"default" : 				{
-					"bgcolor" : [ 0.764706, 0.592157, 0.101961, 1.0 ],
-					"color" : [ 0.646639, 0.821777, 0.854593, 1.0 ]
+					"color" : [ 0.646639, 0.821777, 0.854593, 1.0 ],
+					"bgcolor" : [ 0.764706, 0.592157, 0.101961, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -3026,9 +3095,9 @@
 , 			{
 				"name" : "stb001",
 				"default" : 				{
+					"fontsize" : [ 10.0 ],
 					"fontname" : [ "Arial Bold" ],
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
@@ -3046,8 +3115,8 @@
 , 			{
 				"name" : "tastefulltoggle",
 				"default" : 				{
-					"bgcolor" : [ 0.185512, 0.263736, 0.260626, 1.0 ],
-					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ]
+					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ],
+					"bgcolor" : [ 0.185512, 0.263736, 0.260626, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -3056,9 +3125,9 @@
 , 			{
 				"name" : "tastefultoggle",
 				"default" : 				{
+					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ],
 					"elementcolor" : [ 0.654902, 0.572549, 0.376471, 1.0 ],
-					"bgcolor" : [ 0.287863, 0.333333, 0.329398, 1.0 ],
-					"color" : [ 0.941176, 0.690196, 0.196078, 1.0 ]
+					"bgcolor" : [ 0.287863, 0.333333, 0.329398, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
@@ -3067,8 +3136,8 @@
 , 			{
 				"name" : "test",
 				"default" : 				{
-					"fontface" : [ 1 ],
-					"fontsize" : [ 10.0 ]
+					"fontsize" : [ 10.0 ],
+					"fontface" : [ 1 ]
 				}
 ,
 				"parentstyle" : "",
@@ -3077,8 +3146,8 @@
 , 			{
 				"name" : "whitey",
 				"default" : 				{
-					"fontname" : [ "Dirty Ego" ],
 					"fontsize" : [ 36.0 ],
+					"fontname" : [ "Dirty Ego" ],
 					"selectioncolor" : [ 0.011765, 0.396078, 0.752941, 1.0 ],
 					"textcolor_inverse" : [ 0.65098, 0.666667, 0.662745, 1.0 ],
 					"patchlinecolor" : [ 0.199068, 0.062496, 0.060031, 0.9 ]
