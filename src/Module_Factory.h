@@ -82,6 +82,7 @@
 // Other
 #include "NTP_Sync.h"
 #include "Temperature_Sync.h"
+#include "APWiFi/APWiFi.h"
 
 // General
 #include "Components/WarmUp/WarmUp_Manager.h"
@@ -191,7 +192,8 @@ namespace Include
 	/// Max modules
 	constexpr auto Max = std::make_tuple(
 				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },
-				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }
+				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr },
+				factory::NameModulePair{"APWiFi",		Construct<Loom_APWiFi>,			ConstructDefault<Loom_APWiFi> }
 			);
 
 	/// Ethernet and WiFi modules
