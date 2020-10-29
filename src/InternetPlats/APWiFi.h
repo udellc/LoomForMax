@@ -11,6 +11,8 @@
 #pragma once
 
 #include "Module.h"
+#include "InternetPlat.h"
+
 #include <WiFi101.h>
 #include <WiFiUdp.h>
 #undef min
@@ -26,13 +28,15 @@
 /// - [Dependency: WiFi101](https://github.com/arduino-libraries/WiFi101)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_APWiFi : public LoomModule
+class Loom_APWiFi : public LoomInternetPlat
 {
 
 protected:
 	
 	String	SSID;		///< Host WiFi network name
-	String	pass;		///< Host WiFi network password
+	String	password;	///< Host WiFi network password
+
+	WiFiServer server;
 
 public:
 
@@ -44,9 +48,9 @@ public:
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
 	Loom_APWiFi(
-			LoomManager*	manager,
-			const char*		ssid = "",
-			const char*		pass = ""
+			LoomManager*	manager
+			// const char*		ssid = ""
+			// const char*		pass = ""
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -58,46 +62,14 @@ public:
 	virtual ~Loom_APWiFi() = default;
 
 	//=============================================================================
-	///@name	TYPES
-	/*@{*/ //======================================================================
-
-	/// Close the socket and delete the UDP object when the unique ptr dissapears
-	struct UDPDeletor
-	{
-		void operator()(UDP *p)
-		{
-			if (p != nullptr)
-			{
-				p->stop();
-				delete p;
-			}
-		}
-	};
-
-	/// Cleaner name for UDP smart pointer
-	using UDPPtr = std::unique_ptr<UDP, UDPDeletor>;
-
-	//=============================================================================
 	///@name	OPERATION
 	/*@{*/ //======================================================================
 
-	/// Connect to internet
-	void			connect();
+	/// Create access point
+	bool			start_AP();
 
 	/// Disconnect from the internet
-	void 			disconnect();
-
-	/// Whether or not connected to internet
-	/// @return True if connect, false otherwise
-	bool			is_connected() const;
-
-	/// Open a UDP socket for sending and recieving incoming data.
-	/// @warning Be careful about recieving data from an open socket!
-	/// @returns A UDP socket for transmitting and recieving, remember to close the socket when you are done!
-	UDPPtr			open_socket(const uint port);
-
-	/// Package IP with ID for MaxMSP implementation
-	void			package(JsonObject json) override;
+	void 			disconnect() override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -107,6 +79,25 @@ public:
 	void			print_state() const override;
 	
 private:
+
+	/// Whether or not connected to internet
+	/// @return True if connect, false otherwise
+	bool			is_connected() const override;
+
+	LoomInternetPlat::UDPPtr open_socket(const uint port) override;
+
+	/// Package IP with ID for MaxMSP implementation
+	void			package(JsonObject json) override;
+
 	/// Converts wifi status codes (WL_*) into human readable strings
 	static const char* m_wifi_status_to_string(const uint8_t status);
+
+	// Override the following to do nothing
+	// An unfortunate side effect of making APWiFi an InternetPlat 
+	virtual void			connect() override {};
+	virtual SSLClient&		get_client() override {}
+	virtual const SSLClient& get_client() const override {}
+	virtual ClientSession	http_request(const char* domain, const char* url, const char* body, const char* verb) override {}
+	virtual ClientSession	connect_to_domain(const char* domain) override {}
+	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) override {}
 };

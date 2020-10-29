@@ -41,7 +41,7 @@ public:
 	enum class Type {
 		Unknown = 0,
 		// Other
-		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP, TempSync, WarmUp_Manager, APWiFi,
+		Other=1000,			Interrupt_Manager, Sleep_Manager, Multiplexer, NTP, TempSync, WarmUp_Manager,
 		// Sensors
 		Sensor=2000,		Analog, Digital,
 		// I2C
@@ -61,7 +61,7 @@ public:
 		// CommPlats
 		CommPlat=6000,		LoRa, nRF, Bluetooth,
 		// InternetPlats
-		InternetPlat=7000,	Ethernet, WiFi, LTE,
+		InternetPlat=7000,	Ethernet, WiFi, LTE, APWiFi,
 		// PublishPlats
 		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
 		// SubscribePlats

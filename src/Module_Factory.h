@@ -31,6 +31,7 @@
 #include "InternetPlats/InternetEthernet.h"
 #include "InternetPlats/InternetWiFi.h"
 #include "InternetPlats/InternetLTE.h"
+#include "InternetPlats/APWiFi.h"
 
 // PublishPlats
 #include "PublishPlats/GoogleSheets.h"
@@ -82,7 +83,6 @@
 // Other
 #include "NTP_Sync.h"
 #include "Temperature_Sync.h"
-#include "APWiFi/APWiFi.h"
 
 // General
 #include "Components/WarmUp/WarmUp_Manager.h"

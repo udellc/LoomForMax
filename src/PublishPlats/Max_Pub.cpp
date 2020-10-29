@@ -20,7 +20,8 @@ Loom_MaxPub::Loom_MaxPub(
 		const LoomModule::Type	internet_type
 	)   
 	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
-	, remoteIP({192,168,1,255})
+	// , remoteIP({192,168,1,255})
+	, remoteIP({10,0,0,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
