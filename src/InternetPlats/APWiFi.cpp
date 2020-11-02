@@ -44,7 +44,7 @@ Loom_APWiFi::Loom_APWiFi(
 		return;
 	}
 
-	LPrintln("APWIFI CREATED");
+	LPrintln("# APWIFI CREATED");
 
 	start_AP(); // maybe put this in a second stage constructor
 }
@@ -68,12 +68,14 @@ bool Loom_APWiFi::start_AP()
 		return false;
 	}
 
-	// delay(5000);
+	delay(10000);
 
-	// server.begin();
+	server.begin();
 
 	auto ip = IPAddress(WiFi.localIP());
-	LPrintln(ip[0], '.', ip[1], '.', ip[2], '.', ip[3]);
+	LPrintln("# ", ip[0], '.', ip[1], '.', ip[2], '.', ip[3]);
+
+	print_state();
 
 	return true;
 }

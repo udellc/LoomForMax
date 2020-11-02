@@ -12,6 +12,9 @@
 
 #include "../Manager.h"
 
+#include <WiFi101.h>
+#include <WiFiUdp.h>
+
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
 		LoomManager* manager,
@@ -55,6 +58,29 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 			return false;
 		}
 	}
+
+//Not sure why this code being here made any difference...
+    auto status = WiFi.status();
+
+	// Maybe don't bother sending if nothing is connected?
+	// Would only apply to AP mode though
+	// if (status == WL_AP_CONNECTED) {
+    //   byte remoteMac[6];
+
+    //   // a device has connected to the AP
+    //   Serial.print("Device connected to AP, MAC address: ");
+    //   WiFi.APClientMacAddress(remoteMac);
+    //   LPrint_Hex(remoteMac[0]);
+    //   LPrint_Hex(remoteMac[1]);
+    //   LPrint_Hex(remoteMac[2]);
+    //   LPrint_Hex(remoteMac[3]);
+    //   LPrint_Hex(remoteMac[4]);
+    //   LPrint_Hex(remoteMac[5]);
+	//   LPrintln();
+    // } else {
+    //   // a device has disconnected from the AP, and we are back in listening mode
+    //   Serial.println("Device disconnected from AP");
+	// }
 
 	// If packet available
 	if ( UDP_Inst->parsePacket() ) {
