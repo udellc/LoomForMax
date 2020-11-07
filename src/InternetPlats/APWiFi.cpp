@@ -78,7 +78,6 @@ void Loom_APWiFi::disconnect()
 bool Loom_APWiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
