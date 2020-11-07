@@ -67,6 +67,8 @@ public:
 
 	bool		dispatch(JsonObject json) override;
 
+	bool		update_remote_ip();
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -95,6 +97,9 @@ public:
 
 	/// Set the IP addres to send to by getting remote IP from MaxSub if available
 	void		set_ip();
+
+	/// Change internet platform being used
+	void		set_internet_plat(LoomInternetPlat* plat);
 
 protected:
 

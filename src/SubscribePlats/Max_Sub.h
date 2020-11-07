@@ -29,6 +29,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxSub : public LoomSubscribePlat 
 {
+public:
+//=============================================================================
+///@name	TYPES
+/*@{*/ //======================================================================
+
+	enum class WiFiMode {
+		AP, CLIENT, INVALID
+	};
 
 protected:
 	
@@ -36,6 +44,8 @@ protected:
 	bool		auto_dispatch;			///< True to immediately call LoomManager::dispatch() when packet received
 
 	LoomInternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
+
+	WiFiMode	wifi_mode;
 
 public:
 
@@ -73,7 +83,16 @@ public:
 
 	bool		subscribe(JsonObject json) override;
 
-	using LoomSubscribePlat::subscribe;
+	using		LoomSubscribePlat::subscribe;
+
+	/// Route commands
+	virtual bool dispatch(JsonObject json) override;
+
+	/// Go to Access Point WiFi mode
+	bool		goto_ap_mode();
+
+	/// Go to Client WiFi mode 
+	bool		goto_client_mode(const char* ssid, const char* pass);
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -92,6 +111,8 @@ public:
 	/// Get the last IP address received from
 	/// @return Last IP address
 	IPAddress	get_remote_IP() const { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
+	
+	WiFiMode	get_wifi_mode();
 
 //=============================================================================
 ///@name	SETTERS

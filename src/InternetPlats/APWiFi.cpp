@@ -14,12 +14,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_APWiFi::Loom_APWiFi(	
 		LoomManager*	manager
-		// const char*		ssid
-		// const char*		pass
 	) 
 	: LoomInternetPlat(manager, "APWiFi", Type::APWiFi )
-	// , SSID{ String("Feather_") + String(manager ? manager->device_name() : "")}
-	// , SSID{ manager ? String(manager->get_device_name()) + String(manager->get_instance_num()) : String("Feather") }
 	, password{""}
 	, server{80}
 {
@@ -30,8 +26,6 @@ Loom_APWiFi::Loom_APWiFi(
 	if (manager) {
 		char tmpBuf[20];
 		manager->get_device_name(tmpBuf);
-		LPrintln(tmpBuf);
-		LPrintln(manager->get_device_name());
 		SSID = String(tmpBuf) + String(manager->get_instance_num());
 	} else {
 		SSID = String("Feather");
@@ -44,23 +38,19 @@ Loom_APWiFi::Loom_APWiFi(
 		return;
 	}
 
-	LPrintln("# APWIFI CREATED");
-
 	start_AP(); // maybe put this in a second stage constructor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_APWiFi::Loom_APWiFi(LoomManager* manager, JsonArrayConst p)
-	// : Loom_APWiFi(manager, EXPAND_ARRAY(p, 2) ) {}
-	// : Loom_APWiFi(manager, (const char*)p[0] ) {}
 	: Loom_APWiFi(manager) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_APWiFi::start_AP()
 {
-	// const char* tmpSSID = SSID.c_str();
-	// LPrintln(SSID.c_str());
-	// return false;
+	print_module_label();
+	LPrintln("Starting access point");
+
 	auto status = WiFi.beginAP(SSID.c_str());
 	
 	if (status != WL_AP_LISTENING) {
@@ -69,11 +59,7 @@ bool Loom_APWiFi::start_AP()
 	}
 
 	delay(10000);
-
 	server.begin();
-
-	auto ip = IPAddress(WiFi.localIP());
-	LPrintln("# ", ip[0], '.', ip[1], '.', ip[2], '.', ip[3]);
 
 	print_state();
 
@@ -84,13 +70,15 @@ bool Loom_APWiFi::start_AP()
 void Loom_APWiFi::disconnect() 
 {
 	WiFi.disconnect();
+	WiFi.end();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_APWiFi::is_connected() const
 {
-	return WiFi.status() == WL_CONNECTED;
+	return WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -156,3 +144,10 @@ void Loom_APWiFi::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+IPAddress Loom_APWiFi::get_ip()
+{
+	return IPAddress(WiFi.localIP());
+}
+
+///////////////////////////////////////////////////////////////////////////////
+

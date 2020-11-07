@@ -49,8 +49,6 @@ public:
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
 	Loom_APWiFi(
 			LoomManager*	manager
-			// const char*		ssid = ""
-			// const char*		pass = ""
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -68,8 +66,20 @@ public:
 	/// Create access point
 	bool			start_AP();
 
+	virtual void	connect() override { start_AP(); };
+
 	/// Disconnect from the internet
 	void 			disconnect() override;
+
+	/// Unlike regular InternetPlats, this just returns if the access point is running
+	/// @return True if access point is up, false otherwise
+	bool			is_connected() const override;
+
+//=============================================================================
+///@name	GETTERS
+/*@{*/ //======================================================================
+
+	IPAddress		get_ip();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -79,10 +89,6 @@ public:
 	void			print_state() const override;
 	
 private:
-
-	/// Whether or not connected to internet
-	/// @return True if connect, false otherwise
-	bool			is_connected() const override;
 
 	LoomInternetPlat::UDPPtr open_socket(const uint port) override;
 
@@ -94,7 +100,6 @@ private:
 
 	// Override the following to do nothing
 	// An unfortunate side effect of making APWiFi an InternetPlat 
-	virtual void			connect() override {};
 	virtual SSLClient&		get_client() override {}
 	virtual const SSLClient& get_client() const override {}
 	virtual ClientSession	http_request(const char* domain, const char* url, const char* body, const char* verb) override {}

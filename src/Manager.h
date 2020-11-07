@@ -470,6 +470,10 @@ public:
 	/// @param[in]	category	Category to search for
 	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
 
+	/// Function to search list of modules for a module of specified type and remove it
+	/// @param[in]	type	Type to search for
+	bool		remove_module(const LoomModule::Type type, const uint8_t idx=0);
+
 	///////////////////////////////////////////////////////////////////////////
 
 	// Other

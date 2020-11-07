@@ -59,7 +59,7 @@ bool Loom_Relay::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
-		case 115: if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
+		case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 	}
 	
 	return false;

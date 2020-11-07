@@ -70,9 +70,9 @@ void Loom_WiFi::connect()
 				LPrint("Status changed to: ", status, '\n');
 		}
 		delay(2000);
-	} while (status != WL_CONNECTED && attempt_count < 5);
+	} while (status != WL_CONNECTED && attempt_count < 2);
 
-	if (attempt_count == 5) {
+	if (attempt_count == 2) {
 		print_module_label();
 		LPrintln("Connection failed!");
 		return;
@@ -153,7 +153,12 @@ void Loom_WiFi::package(JsonObject json)
 	tmp.add(ip[1]);
 	tmp.add(ip[2]);
 	tmp.add(ip[3]);
-	//data["IP"] = WiFi.localIP();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+IPAddress Loom_WiFi::get_ip()
+{
+	return IPAddress(WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

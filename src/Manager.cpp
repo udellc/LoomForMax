@@ -196,7 +196,9 @@ void LoomManager::set_package_verbosity(const Verbosity v, const bool set_module
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::measure()
 {	
-	for (auto module : modules) {	
+	for (auto module : modules) {
+		if (!module) continue;	
+
 		if ( !module->get_active() ) continue;
 
 		if ( module->category() == LoomModule::Category::Sensor ) {
@@ -445,6 +447,31 @@ LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::remove_module(const LoomModule::Type type, const uint8_t idx)
+{
+	print_device_label();
+	uint8_t current = 0;
+
+	for (auto it = modules.begin(); it != modules.end(); it++) {	
+		auto module = *it;
+
+		if (module->get_module_type() == type) {
+			if (current == idx) {
+				LPrintln("Removing : ", module->get_module_name());
+				delete module;
+				modules.erase(it);
+				return true;
+			} else {
+				current++;
+			}
+		}
+	}
+
+	LPrintln("No module found to remove");
+	return false; // module not found
+}
+
+///////////////////////////////////////////////////////////////////////////////
 LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category category, const uint8_t idx) const
 {
 	uint8_t current = 0;
@@ -605,13 +632,6 @@ bool LoomManager::parse_config_json(JsonObject config)
 
 	return true;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config_serial()
