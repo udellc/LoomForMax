@@ -11,6 +11,12 @@
 #include "Max_Sub.h"
 
 #include "../Manager.h"
+#include "../InternetPlats/InternetWiFi.h"
+#include "../InternetPlats/APWiFi.h"
+#include "../PublishPlats/Max_Pub.h"
+
+#include <WiFi101.h>
+#include <WiFiUdp.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxSub::Loom_MaxSub(
@@ -20,6 +26,7 @@ Loom_MaxSub::Loom_MaxSub(
 	)   
 	: LoomSubscribePlat(manager, "MaxSub", Type::MaxSub, internet_type )
 	, auto_dispatch(auto_dispatch)
+	, wifi_mode{WiFiMode::INVALID}
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,6 +42,7 @@ void Loom_MaxSub::second_stage_ctor()
 
 	// Get new UDP pointer	
 	if (m_internet != nullptr) {
+		get_wifi_mode(); // determine wifi mode
 		UDP_Inst = m_internet->open_socket(UDP_port);
 	} else {
 		print_module_label();
@@ -53,6 +61,32 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 		if (!UDP_Inst) {
 			LPrintln("UDP_Inst is null");
 			return false;
+		}
+	}
+
+//Not sure why this code being here made any difference...
+    auto status = WiFi.status();
+
+
+	if (wifi_mode == WiFiMode::AP) {
+		print_module_label();
+		// Maybe don't bother sending if nothing is connected?
+		// Would only apply to AP mode though
+		if (status == WL_AP_CONNECTED) {
+		byte remoteMac[6];
+
+		// a device has connected to the AP
+		Serial.print("Device connected to AP, MAC address: ");
+		WiFi.APClientMacAddress(remoteMac);
+		LPrint_Hex(remoteMac[5]);
+		LPrint_Hex(remoteMac[4]);
+		LPrint_Hex(remoteMac[3]);
+		LPrint_Hex(remoteMac[2]);
+		LPrint_Hex(remoteMac[1]);
+		LPrint_Hex(remoteMac[0]);
+		LPrintln();
+		} else {
+			Serial.println("No device connected to AP");
 		}
 	}
 
@@ -121,6 +155,201 @@ void Loom_MaxSub::set_port(const uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxSub::dispatch(JsonObject json)
+{
+	JsonArray params = json["params"];
+	switch( (char)json["func"] ) {
+		case 'a': return goto_ap_mode();
+		case 'c': if (params.size() >= 2) { goto_client_mode(EXPAND_ARRAY(params, 2)); LPrintln("Exitted"); } return true;
+	}
+	return false;
+}
 
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxSub::goto_ap_mode()
+{
+	// Make sure WiFi mode is up to date
+	get_wifi_mode(); 
 
+	bool success = true;
+	LoomInternetPlat* previous_wifi = m_internet;
 
+	switch (wifi_mode) {
+		case WiFiMode::AP: // Already in AP mode
+			print_module_label();
+			LPrintln("Already in AP mode");
+			return true;
+		
+		case WiFiMode::CLIENT:
+		{
+			print_module_label();
+			LPrintln("Switching to AP mode");
+
+			// Disconnect current WiFi 
+			previous_wifi->disconnect();
+
+			// Instantiate APWiFi module
+			m_internet = new Loom_APWiFi(device_manager);
+
+			// Confirm connection 
+			// if (! m_internet->is_connected()) {
+			// 	print_module_label();
+			// 	LPrintln("Failed to start AP");
+			// 	success = false;
+			// 	break;
+			// }
+
+			// Pass Loom_WiFi module to manager
+			if (device_manager) {
+				device_manager->add_module(m_internet);
+			} else {
+				success = false;
+				break;
+			}
+
+			// Successfully switched, remove WiFI module and switch WiFi mode
+			device_manager->remove_module(LoomModule::Type::WiFi);
+			wifi_mode = WiFiMode::CLIENT;
+			break;
+		}
+
+		default: // Invalid WiFi mode, cannot switch mode
+			return false;
+	}
+
+	if (!success) {
+		delete m_internet;
+		m_internet = previous_wifi;
+		m_internet->connect();
+	}
+
+	// Reopen MaxPub socket 
+	if (device_manager) {
+		Loom_MaxPub* tmp = (Loom_MaxPub*)device_manager->find_module(LoomModule::Type::MaxPub);
+		if (tmp) {
+			tmp->set_internet_plat(m_internet);
+		}
+	}
+
+	UDP_Inst = m_internet->open_socket(UDP_port);
+	
+	return success;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
+{
+	// Make sure WiFi mode is up to date
+	get_wifi_mode(); 
+
+	bool success = true;
+	LoomInternetPlat* previous_wifi = m_internet;
+
+	switch (wifi_mode) {
+		case WiFiMode::AP: 
+		{
+			print_module_label();
+			LPrintln("Switching to client mode");
+
+			// Disconnect current WiFi 
+			previous_wifi->disconnect(); 
+
+			// Instantiate Loom_WiFi module
+			m_internet = new Loom_WiFi(device_manager, ssid, pass);
+
+			// Test connection
+			if (! m_internet->is_connected()) {
+				print_module_label();
+				LPrintln("Failed to connect");
+				success = false;
+				break;
+			}
+
+			// Pass Loom_WiFi module to manager
+			if (device_manager) {
+				device_manager->add_module(m_internet);
+			} else {
+				success = false;
+				break;
+			}
+
+			// Successfully switched, remove AP WiFI module and switch WiFi mode
+			device_manager->remove_module(LoomModule::Type::APWiFi);
+			wifi_mode = WiFiMode::CLIENT;
+			break;
+		}
+
+		case WiFiMode::CLIENT:
+		{
+			print_module_label();
+			LPrintln("Connecting to new WiFi network");
+
+			// Disconnect current WiFi 
+			previous_wifi->disconnect(); 
+
+			// Instantiate Loom_WiFi module
+			m_internet = new Loom_WiFi(device_manager, ssid, pass);
+
+			// Test connection
+			if (! m_internet->is_connected()) {
+				print_module_label();
+				LPrintln("Failed to connect");
+				success = false;
+				break;
+			}
+
+			// Successfully switched, remove AP WiFI module, switch WiFi mode, 
+			// and pass new Loom_WiFi module to manager
+			if (device_manager) {
+				device_manager->remove_module(LoomModule::Type::WiFi);
+				device_manager->add_module(m_internet);
+			} else {
+				success = false;
+				break;
+			}
+
+			wifi_mode = WiFiMode::CLIENT;
+			break;
+		}
+
+		default: // Invalid WiFi mode, cannot switch mode
+			return false;
+	}
+
+	if (!success) {
+		delete m_internet;
+		m_internet = previous_wifi;
+		m_internet->connect();
+	}
+
+	// Reopen MaxPub socket 
+	if (device_manager) {
+		Loom_MaxPub* tmp = (Loom_MaxPub*)device_manager->find_module(LoomModule::Type::MaxPub);
+		if (tmp) {
+			tmp->set_internet_plat(m_internet);
+		}
+	}
+
+	UDP_Inst = m_internet->open_socket(UDP_port);
+	
+	return success;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+Loom_MaxSub::WiFiMode Loom_MaxSub::get_wifi_mode() 
+{
+	wifi_mode = WiFiMode::INVALID;
+
+	if (m_internet) {
+		if (m_internet->get_module_type() == LoomModule::Type::APWiFi) {
+			wifi_mode = WiFiMode::AP;
+		} else if (m_internet->get_module_type() == LoomModule::Type::WiFi) {	
+			wifi_mode = WiFiMode::CLIENT;
+		}
+	}
+
+	return wifi_mode;
+}
+
+///////////////////////////////////////////////////////////////////////////////

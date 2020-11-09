@@ -30,10 +30,10 @@ class LoomSubscribePlat : public LoomModule
 
 protected:
 
-	/// Pointer to internet platform to use to publish
+	/// Pointer to internet platform to use to subscribe
 	LoomInternetPlat*		m_internet;
 	
-	/// Type of internet platform used to publish.
+	/// Type of internet platform used to subscribe.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
 	const LoomModule::Type	internet_type;

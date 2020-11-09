@@ -61,7 +61,7 @@ public:
 		// CommPlats
 		CommPlat=6000,		LoRa, nRF, Bluetooth,
 		// InternetPlats
-		InternetPlat=7000,	Ethernet, WiFi, LTE,
+		InternetPlat=7000,	Ethernet, WiFi, LTE, APWiFi,
 		// PublishPlats
 		PublishPlat=8000,	GoogleSheets, MaxPub, SpoolPub,
 		// SubscribePlats

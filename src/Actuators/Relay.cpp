@@ -57,20 +57,9 @@ void Loom_Relay::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Relay::dispatch(JsonObject json)
 {
-// 	LPrintln("Command sent to relay is:");
-// 	serializeJsonPretty(json, Serial);
-
-// 	LPrintln("Function char is: ", json["func"].as<const char*>() );
-// 	LPrintln("Function char is: ", json["func"].as<char>() );
-// 	LPrintln("Function char is: ", json["func"].as<unsigned char>() );
-
-
 	JsonArray params = json["params"];
-	// switch( json["func"].as<const char*>()[0] ) { // works
-	// switch( json["func"].as<unsigned char>() ) { 
 	switch( (char)json["func"] ) {
-		// case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
-		case 115: if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
+		case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 	}
 	
 	return false;
@@ -79,8 +68,6 @@ bool Loom_Relay::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::set(const bool state)
 {
-	LPrintln("In set");
-
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);
 

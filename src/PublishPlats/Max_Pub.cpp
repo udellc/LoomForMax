@@ -12,6 +12,8 @@
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
+#include "../InternetPlats/InternetWiFi.h"
+#include "../InternetPlats/APWiFi.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,8 +33,9 @@ void Loom_MaxPub::second_stage_ctor()
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
 	// Get new UDP pointer	
-	if (m_internet != nullptr) {
+	if (m_internet) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
+		update_remote_ip();
 	} else {
 		print_module_label();
 		LPrintln("No internet platform, could not get UDP object");
@@ -119,9 +122,37 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::set_internet_plat(LoomInternetPlat* plat)
+{
+	m_internet = plat;
 
+	if (m_internet) {
+		set_port(UDP_port);
+		update_remote_ip();
+	}
+}
 
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxPub::update_remote_ip()
+{
+	if (!m_internet) return false;
 
+	IPAddress ip;
+	if (m_internet->get_module_type() == LoomModule::Type::WiFi) {
+		ip = ((Loom_WiFi*)m_internet)->get_ip();
+	} else if (m_internet->get_module_type() == LoomModule::Type::APWiFi) {
+		ip = ((Loom_APWiFi*)m_internet)->get_ip();
+	} else {
+		return false;
+	}
+
+	remoteIP = IPAddress(ip[0], ip[1], ip[2], 255);
+	print_module_label();
+	LPrintln("Set destination IP to :", remoteIP);
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 
